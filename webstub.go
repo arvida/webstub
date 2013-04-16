@@ -18,16 +18,16 @@ func Disable() {
 }
 
 type Request struct {
-	method     string
-	url        string
-	statusCode int
-	headers    map[string]string
-	response   string
-	file       string
+	Method     string
+	Url        string
+	StatusCode int
+	Headers    map[string]string
+	Response   string
+	File       string
 }
 
 func Register(rp Request) {
-	key := rp.method + "-" + rp.url
+	key := rp.Method + "-" + rp.Url
 	transport.stubs[key] = rp
 }
 
@@ -40,8 +40,8 @@ func (m *stubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	key := req.Method + "-" + req.URL.String()
 
 	if stub_request, ok := m.stubs[key]; ok {
-		if stub_request.file != "" {
-			file, err := os.Open(stub_request.file)
+		if stub_request.File != "" {
+			file, err := os.Open(stub_request.File)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -52,18 +52,18 @@ func (m *stubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 		response := new(http.Response)
 
-		if stub_request.statusCode > 0 {
-			response.StatusCode = stub_request.statusCode
+		if stub_request.StatusCode > 0 {
+			response.StatusCode = stub_request.StatusCode
 		} else {
 			response.StatusCode = 200
 		}
 
 		response.Header = make(http.Header)
-		for name, value := range stub_request.headers {
+		for name, value := range stub_request.Headers {
 			response.Header.Add(name, value)
 		}
 
-		b := bytes.NewBufferString(stub_request.response)
+		b := bytes.NewBufferString(stub_request.Response)
 		response.Body = ioutil.NopCloser(b)
 
 		return response, nil

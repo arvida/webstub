@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"github.com/arvida/webstub"
+	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -11,24 +12,24 @@ func main() {
 	webstub.Enable()
 
 	// Setup a stubbed response for GET requests to http://example.com/my-endpoint
-	p := webstub.Request{
-		method:   "GET",
-		url:      "http://example.com/my-endpoint",
-		response: "Hello from the example!",
+	r := webstub.Request{
+		Method:   "GET",
+		Url:      "http://example.com/my-endpoint",
+		Response: "Hello from the example!",
 	}
-	webstub.Register(p)
+	webstub.Register(r)
 
 	// Make a request
 	resp, err := http.Get("http://example.com/my-endpoint")
 	if err != nil {
-		t.Fatal(err)
+		log.Fatal(err)
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		t.Fatal(err)
+		log.Fatal(err)
 	}
 
-	fmt.Println(string(body))
+	log.Println(string(body))
 }

@@ -12,9 +12,9 @@ func init() {
 
 func TestStubResponseFromString(t *testing.T) {
 	p := Request{
-		method:   "GET",
-		url:      "http://example.com/my-endpoint",
-		response: "yo",
+		Method:   "GET",
+		Url:      "http://example.com/my-endpoint",
+		Response: "yo",
 	}
 	Register(p)
 
@@ -27,9 +27,9 @@ func TestStubResponseFromString(t *testing.T) {
 
 func TestStubStatusCode(t *testing.T) {
 	p := Request{
-		method:     "GET",
-		url:        "http://example.com/my-endpoint",
-		statusCode: 418,
+		Method:     "GET",
+		Url:        "http://example.com/my-endpoint",
+		StatusCode: 418,
 	}
 	Register(p)
 
@@ -45,9 +45,9 @@ func TestStubHeaders(t *testing.T) {
 		"Content-Type": "application/json",
 	}
 	p := Request{
-		method:  "GET",
-		url:     "http://example.com/my-endpoint",
-		headers: headers,
+		Method:  "GET",
+		Url:     "http://example.com/my-endpoint",
+		Headers: headers,
 	}
 	Register(p)
 
@@ -60,9 +60,9 @@ func TestStubHeaders(t *testing.T) {
 
 func TestStubResponseFromFile(t *testing.T) {
 	p := Request{
-		method: "GET",
-		url:    "http://example.com/my-endpoint",
-		file:   "fixtures/hello_response.json",
+		Method: "GET",
+		Url:    "http://example.com/my-endpoint",
+		File:   "fixtures/hello_response.json",
 	}
 	Register(p)
 
