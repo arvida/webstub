@@ -24,12 +24,12 @@ func main() {
 	webstub.Enable()
 
 	// Setup a stubbed response for GET requests to http://example.com/my-endpoint
-	p := webstub.Request{
+	r := webstub.Request{
 		method:   "GET",
 		url:      "http://example.com/my-endpoint",
 		response: "Hello from the example!",
 	}
-	webstub.Register(p)
+	webstub.Register(r)
 
 	// Make a request
 	resp, err := http.Get("http://example.com/my-endpoint")
@@ -57,12 +57,12 @@ Save the response to a text file. It is easy to save a live response with `curl`
 Set the `webstub.Request` `file` parameter to specify the response file to use:
 
 ```go
-p := webstub.Request{
+r := webstub.Request{
 	method: "GET",
     url: "http://example.com/",
-    file: "/stubbed_response.txt",
+    file: "stubbed_response.txt",
 }
-webstub.Register(p)
+webstub.Register(r)
 ```
 
 ## Contribute
