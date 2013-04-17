@@ -79,7 +79,7 @@ func TestStubResponseFromFile(t *testing.T) {
 
 // Helpers
 func get(url string) (*http.Response, string) {
-	resp, _ := http.Get("http://example.com/my-endpoint")
+	resp, _ := http.Get(url)
 	defer resp.Body.Close()
 
 	body, _ := ioutil.ReadAll(resp.Body)
