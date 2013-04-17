@@ -9,15 +9,9 @@ func TestFindBeers(t *testing.T) {
 	webstub.Enable()
 
 	r := webstub.Request{
-		Method: "GET",
-		Url:    "http://api.openbeerdatabase.com/v1/beers.json?query=mybeer",
-		Response: `{
-      "beers": [{
-        "name": "Da Beer",
-        "description": "Great",
-        "abv": 3.5
-      }]
-    }`,
+		Method:   "GET",
+		Url:      "http://api.openbeerdatabase.com/v1/beers.json?query=mybeer",
+		Response: `{"beers": [{"name": "Da Beer", "description": "Great", "abv": 3.5}]}`,
 	}
 	webstub.Register(r)
 
